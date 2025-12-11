@@ -1,0 +1,46 @@
+# he_batch_encrypt.py
+import os, json, pickle
+from phe import paillier
+
+# Input: use processed_dataset.json (array of records) in your FYP folder
+INPUT_JSON = "processed_dataset.json"
+OUT_DIR = "encrypted_blobs"
+os.makedirs(OUT_DIR, exist_ok=True)
+
+# load public key
+with open("he_pub.pkl", "rb") as f:
+    public_key = pickle.load(f)
+
+def encrypt_value(val):
+    # scale floats to preserve 2 decimal places
+    if isinstance(val, float):
+        scaled = int(round(val * 100))
+        ct = public_key.encrypt(scaled)
+        return {"ct": str(ct.ciphertext()), "scale": 100}
+    else:
+        try:
+            ival = int(val)
+            ct = public_key.encrypt(ival)
+            return {"ct": str(ct.ciphertext()), "scale": 1}
+        except:
+            return None
+
+with open(INPUT_JSON, "r", encoding="utf-8") as f:
+    records = json.load(f)
+
+for i, rec in enumerate(records):
+    enc = {}
+    for k in ["heart_rate","temperature","systolic","diastolic"]:
+        if k in rec:
+            enc[k] = encrypt_value(rec[k])
+        else:
+            enc[k] = None
+    blob = {"meta": {"patient_id": rec.get("patient_id"), "timestamp": rec.get("timestamp"), "device_id": rec.get("device_id")},
+            "encrypted": enc}
+    outpath = os.path.join(OUT_DIR, f"enc_rec_{i:06d}.json")
+    with open(outpath, "w", encoding="utf-8") as fo:
+        json.dump(blob, fo)
+    if (i+1) % 50 == 0:
+        print(f"Encrypted {i+1} records...")
+
+print(f"Encryption complete. Files in: {OUT_DIR}")
