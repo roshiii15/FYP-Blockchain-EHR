@@ -205,3 +205,20 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# -----------------------------
+# Project-specific ignore rules
+# -----------------------------
+
+# Virtual environment
+fyp_env/
+
+# Private homomorphic encryption key
+he_priv.pkl
+
+# Encrypted blobs (optional – skip if small)
+encrypted_blobs/
+
+# Ganache local contract address (do not share)
+contract_addr.txt
