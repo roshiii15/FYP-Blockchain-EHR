@@ -1,10 +1,10 @@
 import pandas as pd
 import json
 
-# 1. Load dataset exactly with your column names
+# Load dataset exactly with your column names
 df = pd.read_csv("Patient_Dataset.csv")
 
-# 2. Rename columns to cleaner internal names (optional but better for blockchain)
+# Rename columns to cleaner internal names
 df = df.rename(columns={
     "Patient ID": "patient_id",
     "Timestamp": "timestamp",
@@ -18,19 +18,19 @@ df = df.rename(columns={
     "Target": "target"
 })
 
-# 3. Split blood pressure "116/84" into two numeric values
+# Split blood pressure "116/84" into two numeric values
 df[['systolic', 'diastolic']] = df['blood_pressure'].str.split('/', expand=True).astype(int)
 
-# 4. Convert timestamp to ISO format (VERY important for blockchain logs)
+# Convert timestamp to ISO format 
 df['timestamp'] = pd.to_datetime(df['timestamp'], dayfirst=True).astype(str)
 
-# 5. Drop original blood_pressure column
+# Drop original blood_pressure column
 df = df.drop(columns=['blood_pressure'])
 
-# 6. Convert to JSON records for blockchain/IPFS storage
+# Convert to JSON records for blockchain/IPFS storage
 records = df.to_dict(orient='records')
 
-# 7. Save JSON
+# Save JSON
 with open("processed_dataset.json", "w") as f:
     json.dump(records, f, indent=4)
 

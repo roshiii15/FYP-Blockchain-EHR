@@ -3,7 +3,7 @@ from solcx import compile_standard, install_solc
 from web3 import Web3
 import json
 
-# Install compiler (first time only). Safe to run everytime.
+# Install compiler
 install_solc('0.8.0')
 
 # Load contract source

@@ -1,8 +1,9 @@
 # he_batch_encrypt.py
 import os, json, pickle
 from phe import paillier
+import time
 
-# Input: use processed_dataset.json (array of records) in your FYP folder
+# Input: use processed_dataset.json (array of records)
 INPUT_JSON = "processed_dataset.json"
 OUT_DIR = "encrypted_blobs"
 os.makedirs(OUT_DIR, exist_ok=True)
@@ -28,6 +29,9 @@ def encrypt_value(val):
 with open(INPUT_JSON, "r", encoding="utf-8") as f:
     records = json.load(f)
 
+# METRICS
+enc_start = time.time()
+
 for i, rec in enumerate(records):
     enc = {}
     for k in ["heart_rate","temperature","systolic","diastolic"]:
@@ -35,12 +39,50 @@ for i, rec in enumerate(records):
             enc[k] = encrypt_value(rec[k])
         else:
             enc[k] = None
-    blob = {"meta": {"patient_id": rec.get("patient_id"), "timestamp": rec.get("timestamp"), "device_id": rec.get("device_id")},
-            "encrypted": enc}
+
+    blob = {
+        "meta": {
+            "patient_id": rec.get("patient_id"),
+            "timestamp": rec.get("timestamp"),
+            "device_id": rec.get("device_id")
+        },
+        "encrypted": enc
+    }
+
     outpath = os.path.join(OUT_DIR, f"enc_rec_{i:06d}.json")
     with open(outpath, "w", encoding="utf-8") as fo:
         json.dump(blob, fo)
+
     if (i+1) % 50 == 0:
         print(f"Encrypted {i+1} records...")
 
+# METRICS
+enc_end = time.time()
+encryption_time_ms = (enc_end - enc_start) * 1000
+
+# METRICS
+plain_size = os.path.getsize(INPUT_JSON)
+
+# use last encrypted file as representative size
+enc_size = os.path.getsize(outpath)
+ciphertext_expansion = enc_size / plain_size
+
+# log metrics
+os.makedirs("metrics", exist_ok=True)
+
+metrics = {
+    "module": "Homomorphic Encryption",
+    "records_encrypted": len(records),
+    "encryption_time_ms": encryption_time_ms,
+    "plaintext_size_bytes": plain_size,
+    "encrypted_record_size_bytes": enc_size,
+    "ciphertext_expansion_ratio": ciphertext_expansion
+}
+
+with open("metrics/metrics_log.jsonl", "a", encoding="utf-8") as f:
+    f.write(json.dumps(metrics) + "\n")
+
 print(f"Encryption complete. Files in: {OUT_DIR}")
+print("✔ Encryption metrics recorded")
+print(f"Encryption Time (ms): {encryption_time_ms:.2f}")
+print(f"Ciphertext Expansion Ratio: {ciphertext_expansion:.2f}x")

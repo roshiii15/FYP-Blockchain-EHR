@@ -1,0 +1,8 @@
+{"module": "Homomorphic Encryption", "records_encrypted": 2000, "encryption_time_ms": 847370.5306053162, 
+    "plaintext_size_bytes": 738169, "encrypted_record_size_bytes": 5191, "ciphertext_expansion_ratio": 0.007032264969133084}
+{"module": "IPFS Storage", "storage_mode": "IPFS", "total_files": 2000, "successful_uploads": 2000, "failed_uploads": 0, 
+    "total_upload_time_ms": 4191080.288887024, "average_upload_time_ms": 2095.540144443512, "total_data_uploaded_bytes": 10380349}
+{"module": "Blockchain Storage", "total_transactions": 2000, "total_transaction_time_sec": 309.11010551452637, 
+    "average_transaction_time_sec": 0.1545550527572632, "total_gas_used": 234772000, "average_gas_used": 117386.0, 
+        "throughput_tx_per_sec": 6.470186397403341}
+{"module": "Secure Retrieval", "record_id": "enc_rec_000283.json", "secure_retrieval_time_ms": 32846.92597389221}
