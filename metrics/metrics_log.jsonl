@@ -6,3 +6,8 @@
     "average_transaction_time_sec": 0.1545550527572632, "total_gas_used": 234772000, "average_gas_used": 117386.0, 
         "throughput_tx_per_sec": 6.470186397403341}
 {"module": "Secure Retrieval", "record_id": "enc_rec_000283.json", "secure_retrieval_time_ms": 32846.92597389221}
+{"module": "Encrypted Anomaly Detection", "records_processed": 2000, "normal_records": 834, "high_risk_records": 929, 
+    "critical_records": 237, "total_detection_time_ms": 1932567.7602291107, "average_time_per_record_ms": 966.2838801145554}
+{"module": "SSE Index Building", "records_indexed": 2000, "total_keywords_indexed": 8000, "unique_encrypted_keywords": 3779, "average_keywords_per_record": 4.0, "total_index_build_time_ms": 26.61, "average_index_time_per_record_ms": 0.0133, "index_size_kb": 322.38}
+{"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 132657.44519233704, "average_latency_ms": 66.32872259616852, "throughput_tps": 15.0764248256119, "total_gas_used": 232922000, "average_gas_per_tx": 116461.0}
+{"module": "SSE Index Building", "records_indexed": 2000, "total_keywords_indexed": 22000, "unique_encrypted_keywords": 6020, "average_keywords_per_record": 11.0, "total_index_build_time_ms": 33.92, "average_index_time_per_record_ms": 0.017, "index_size_kb": 540.96}
