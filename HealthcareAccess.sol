@@ -3,8 +3,6 @@ pragma solidity ^0.8.17;
 
 contract HealthcareAccess {
 
-    enum Role { NONE, DOCTOR, ADMIN, NURSE }
-
     struct Record {
         string cid;
         bool exists;
@@ -15,13 +13,12 @@ contract HealthcareAccess {
         string recordId;
         bool emergency;
         bool granted;
-        Role role;
+        string role;
         uint256 timestamp;
     }
 
     address public owner;
 
-    mapping(address => Role) public roles;
     mapping(string => Record) private records;
     mapping(address => AuditLog[]) private auditLogs;
 
@@ -29,37 +26,38 @@ contract HealthcareAccess {
         owner = msg.sender;
     }
 
-    /* ---------- ROLE MANAGEMENT ---------- */
-
-    function assignRole(address user, Role role) external {
-        require(msg.sender == owner, "Only owner");
-        roles[user] = role;
-    }
-
     /* ---------- STORE CID ONLY ---------- */
 
     function storeRecord(string memory recordId, string memory cid) external {
-        require(msg.sender == owner, "Only owner");
+        require(msg.sender == owner, "Only owner can store records");
 
         records[recordId] = Record(cid, true);
     }
 
     /* ---------- ACCESS CONTROL ---------- */
-
+    /*
+        Role comes from FRONTEND (doctor / nurse / admin)
+        Emergency also comes from frontend toggle
+    */
     function requestAccess(
         string memory recordId,
+        string memory role,
         bool emergency
     ) internal returns (bool) {
 
         require(records[recordId].exists, "Record not found");
 
-        Role r = roles[msg.sender];
         bool allowed = false;
 
-        if (r == Role.DOCTOR) {
+        // Doctor: always allowed
+        if (keccak256(bytes(role)) == keccak256(bytes("doctor"))) {
             allowed = true;
         }
-        else if (r == Role.ADMIN || r == Role.NURSE) {
+        // Nurse / Admin: only emergency
+        else if (
+            keccak256(bytes(role)) == keccak256(bytes("nurse")) ||
+            keccak256(bytes(role)) == keccak256(bytes("admin"))
+        ) {
             if (emergency == true) {
                 allowed = true;
             }
@@ -71,7 +69,7 @@ contract HealthcareAccess {
                 recordId,
                 emergency,
                 allowed,
-                r,
+                role,
                 block.timestamp
             )
         );
@@ -79,18 +77,31 @@ contract HealthcareAccess {
         return allowed;
     }
 
-    /* ---------- GET CID ---------- */
+    /* ---------- GET CID WITH ACCESS CHECK ---------- */
 
     function getCID(
         string memory recordId,
+        string memory role,
         bool emergency
     ) external returns (string memory) {
 
-        bool ok = requestAccess(recordId, emergency);
+        bool ok = requestAccess(recordId, role, emergency);
         require(ok, "Access denied");
 
         return records[recordId].cid;
     }
+
+    // ADD THIS BELOW getCID()
+
+    function getCIDView(string memory recordId)
+        external
+        view
+        returns (string memory)
+    {
+        require(records[recordId].exists, "Record not found");
+        return records[recordId].cid;
+    }
+
 
     /* ---------- AUDIT ---------- */
 

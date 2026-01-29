@@ -11,3 +11,38 @@
 {"module": "SSE Index Building", "records_indexed": 2000, "total_keywords_indexed": 8000, "unique_encrypted_keywords": 3779, "average_keywords_per_record": 4.0, "total_index_build_time_ms": 26.61, "average_index_time_per_record_ms": 0.0133, "index_size_kb": 322.38}
 {"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 132657.44519233704, "average_latency_ms": 66.32872259616852, "throughput_tps": 15.0764248256119, "total_gas_used": 232922000, "average_gas_per_tx": 116461.0}
 {"module": "SSE Index Building", "records_indexed": 2000, "total_keywords_indexed": 22000, "unique_encrypted_keywords": 6020, "average_keywords_per_record": 11.0, "total_index_build_time_ms": 33.92, "average_index_time_per_record_ms": 0.017, "index_size_kb": 540.96}
+{"module": "SSE Search", "search_keyword": "show critical records", "records_matched": 0, "search_time_ms": 28.325}
+{"module": "Search API", "keyword": "show critical records", "results": 0, "time_ms": 33.507}
+{"module": "SSE Search", "search_keyword": "critical", "records_matched": 0, "search_time_ms": 42.982}
+{"module": "Search API", "keyword": "critical", "results": 0, "time_ms": 44.976}
+{"module": "SSE Search", "search_keyword": "CRITICAL", "records_matched": 0, "search_time_ms": 11.13}
+{"module": "Search API", "keyword": "CRITICAL", "results": 0, "time_ms": 18.115}
+{"module": "SSE Search", "search_keyword": "RISK_CRITICAL", "records_matched": 237, "search_time_ms": 6.979}
+{"module": "Search API", "keyword": "RISK_CRITICAL", "results": 237, "time_ms": 12.992}
+{"module": "SSE Search", "query": "critical", "normalized_keywords": 1, "results_found": 237, "search_time_ms": 10.094}
+{"module": "SSE Search", "query": "show normal records", "normalized_keywords": 1, "results_found": 834, "search_time_ms": 427.859}
+{"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 622092.7338600159, "average_latency_ms": 311.04636693000793, "throughput_tps": 3.214954766615298, "total_gas_used": 74338000, "average_gas_per_tx": 37169.0}
+{"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 85119.26698684692, "average_latency_ms": 42.55963349342346, "throughput_tps": 23.49644294174961, "total_gas_used": 45576000, "average_gas_per_tx": 22788.0}
+{"module": "SSE Search", "query": "show critical records", "normalized_keywords": 1, "results_found": 237, "search_time_ms": 16.314}
+{"module": "SSE Search", "query": "show records of patient 12", "normalized_keywords": 1, "results_found": 0, "search_time_ms": 20.105}
+{"module": "SSE Search", "query": "show records of patient_12", "normalized_keywords": 0, "results_found": 0, "search_time_ms": 52.258}
+{"module": "SSE Search", "query": "show records of patient 1012", "normalized_keywords": 1, "results_found": 0, "search_time_ms": 14.571}
+{"module": "SSE Search", "query": "show records of patient 2000", "normalized_keywords": 1, "results_found": 0, "search_time_ms": 12.288}
+{"module": "SSE Search", "query": "show records of date 06-05-2025", "normalized_keywords": 1, "results_found": 0, "search_time_ms": 13.961}
+{"module": "SSE Search", "query": "06-05-2025", "normalized_keywords": 1, "results_found": 0, "search_time_ms": 8.976}
+{"module": "SSE Search", "query": "critical", "normalized_keywords": 1, "results_found": 237, "search_time_ms": 12.33}
+{"module": "Blockchain Access", "record_id": "enc_rec_001785", "role": "doctor", "emergency": false, "access_granted": true, "latency_ms": 165.22}
+{"module": "Blockchain Access", "record_id": "enc_rec_001532", "role": "doctor", "emergency": false, "access_granted": false, "latency_ms": 138.14}
+{"module": "Blockchain Access", "record_id": "enc_rec_001810", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 123.74}
+{"module": "Blockchain Access", "record_id": "enc_rec_001810", "role": "doctor", "emergency": true, "access_granted": true, "latency_ms": 181.27}
+{"module": "Blockchain Access", "record_id": "enc_rec_001954", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 87.77}
+{"module": "Blockchain Access", "record_id": "enc_rec_001810", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 35.83}
+{"module": "Blockchain Access", "record_id": "enc_rec_001954", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 64.89}
+{"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 98996.33383750916, "average_latency_ms": 49.49816691875458, "throughput_tps": 20.20276834981349, "total_gas_used": 45576000, "average_gas_per_tx": 22788.0}
+{"module": "Blockchain Access", "record_id": "enc_rec_001954", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 108.77}
+{"module": "Blockchain Access", "record_id": "enc_rec_001810", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 246.4}
+{"module": "Blockchain Access", "record_id": "enc_rec_001588", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 172.81}
+{"module": "Blockchain Access", "record_id": "enc_rec_001532", "role": "doctor", "emergency": true, "access_granted": false, "latency_ms": 100.87}
+{"module": "Blockchain Access", "record_id": "enc_rec_001954", "role": "doctor", "emergency": true, "access_granted": "yes", "latency_ms": 80.99}
+{"module": "Blockchain CID Storage", "total_transactions": 2000, "total_time_ms": 112693.36104393005, "average_latency_ms": 56.34668052196503, "throughput_tps": 17.74727438664609, "total_gas_used": 45576000, "average_gas_per_tx": 22788.0}
+{"module": "SSE Search", "query": "critical", "normalized_keywords": 1, "results_found": 237, "search_time_ms": 21.264}
